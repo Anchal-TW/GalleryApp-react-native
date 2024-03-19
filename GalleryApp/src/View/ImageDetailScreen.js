@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -6,61 +6,31 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  Image,
 } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
 
-const ImageDetailScreen = ({ navigation }) => {
-  const users1 = [
-    {
-      title: 'mountain',
-      imageSource: require('../images/beach.jpg'),
-      imageScore: 9,
-    },
-    {
-      title: 'sea',
-      imageSource: require('../images/beach.jpg'),
-      imageScore: 7,
-    },
-    {
-      title: 'tiger',
-      imageSource: require('../images/forest.jpg'),
-      imageScore: 6,
-    },
-    {
-      title: 'mountain',
-      imageSource: require('../images/beach.jpg'),
-      imageScore: 9,
-    },
-    {
-      title: 'sea',
-      imageSource: require('../images/beach.jpg'),
-      imageScore: 7,
-    },
-  ];
+import context from '../Helper/Context';
+import { useContext } from 'react';
 
-  // React.useEffect(() => {
-  //     navigation.setOptions({headerRight: () => {
-  //         <Button title='ADD' onPress={
-  //             openImagePicker
-  //         }/>
-  //     }})
-  // },[navigation]);
-
+const ImageDetailScreen = () => {
+  const { items } = useContext(context);
+  console.warn(items);
+  console.log(items);
   return (
     <ScrollView>
       <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
-        {users1.map(item => (
+        {items.map(item => (
           <View style={styles.viewStyle}>
-            <ImageBackground
+            {/* <ImageBackground
               style={styles.imageStyle}
-              source={item.imageSource}
+              source={item}
               resizeMode="cover">
               <TouchableOpacity style={styles.buttonStyle}>
                 <Text>add</Text>
               </TouchableOpacity>
-            </ImageBackground>
-            <Text style={styles.textStyle}>{item.title}</Text>
-            <Text style={styles.textStyle}>ImageScore {item.imageScore}</Text>
+              
+            </ImageBackground> */}
+            <Image source={{ uri: item }} />
           </View>
         ))}
       </View>
